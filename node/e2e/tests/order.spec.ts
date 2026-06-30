@@ -9,20 +9,8 @@ import CheckoutCompletePage from "../components/CheckoutCompletePage";
 import CartPage from "../components/CartPage";
 
 test.describe("Flow - Order", async () => {
-  let loginForm: LoginForm;
-  let inventoryList: InventoryList;
-  let primaryHeader: PrimaryHeader;
-  let cartPage: CartPage;
-  let checkoutPage: CheckoutPage;
-  let checkoutCompletePage: CheckoutCompletePage;
-
   test.beforeEach("Setup", async ({ page }) => {
-    loginForm = new LoginForm(page);
-    inventoryList = new InventoryList(page);
-    primaryHeader = new PrimaryHeader(page);
-    cartPage = new CartPage(page);
-    checkoutPage = new CheckoutPage(page);
-    checkoutCompletePage = new CheckoutCompletePage(page);
+    const loginForm = new LoginForm(page);
 
     await page.goto("/");
     await loginForm.login(AcceptedUsernames.StandardUser, DEFAULT_PASSWORD);
@@ -31,6 +19,12 @@ test.describe("Flow - Order", async () => {
   });
 
   test("Order", async ({ page }) => {
+    const inventoryList = new InventoryList(page);
+    const primaryHeader = new PrimaryHeader(page);
+    const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
+    const checkoutCompletePage = new CheckoutCompletePage(page);
+
     const itemsToAdd = [
       InventoryItems.SauceLabsBackpack,
       InventoryItems.SauceLabsFleeceJacket,
