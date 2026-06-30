@@ -1,7 +1,7 @@
 import { Locator, Page } from "@playwright/test";
-import Component from "./BaseComponent";
+import BaseComponent from "./BaseComponent";
 
-export default class InventoryItem extends Component {
+export default class InventoryItem extends BaseComponent {
   private root: Locator;
   itemName: string;
 

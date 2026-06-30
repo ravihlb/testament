@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export default abstract class Component {
+export default abstract class BaseComponent {
   protected page: Page;
   elements: Record<string, Locator>;
 

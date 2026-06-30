@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
-import Component from "./BaseComponent";
+import BaseComponent from "./BaseComponent";
 
-export default class PrimaryHeader extends Component {
+export default class PrimaryHeader extends BaseComponent {
   constructor(page: Page) {
     super(page);
 

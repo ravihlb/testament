@@ -1,9 +1,9 @@
 import { Page } from "@playwright/test";
-import Component from "./BaseComponent";
+import BaseComponent from "./BaseComponent";
 import InventoryItem from "./InventoryItem";
 import { InventoryItems } from "../data/products";
 
-export default class InventoryList extends Component {
+export default class InventoryList extends BaseComponent {
   constructor(page: Page) {
     super(page);
   }

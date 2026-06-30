@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import Component from "./BaseComponent";
+import BaseComponent from "./BaseComponent";
 
 export type CheckoutFormFields = {
   firstName: string;
@@ -7,7 +7,7 @@ export type CheckoutFormFields = {
   postalCode: string;
 };
 
-export default class CheckoutPage extends Component {
+export default class CheckoutPage extends BaseComponent {
   constructor(page: Page) {
     super(page);
 

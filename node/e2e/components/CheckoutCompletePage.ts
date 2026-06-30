@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
-import Component from "./BaseComponent";
+import BaseComponent from "./BaseComponent";
 
-export default class CheckoutCompletePage extends Component {
+export default class CheckoutCompletePage extends BaseComponent {
   constructor(page: Page) {
     super(page);
 
