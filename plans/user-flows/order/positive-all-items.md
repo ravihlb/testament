@@ -1,16 +1,23 @@
-# Test Plan - Order Flow
+# Positive Test Plan - Order Flow: All Items
 
 ## Prerequisites
 
 - Standard user is logged in
 - Standard user is on the Products/inventory page
 
+## Dataset
+
+- All Items:
+  - Sauce Labs Backpack
+  - Sauce Labs Bike Light
+  - Sauce Labs Bolt T-Shirt
+  - Sauce Labs Fleece Jacket
+  - Sauce Labs Onesie
+  - Test.allTheThings() T-Shirt (Red)
+
 ## Steps
 
-1. Add to cart 3 Products from catalog:
-  - Sauce Labs Backpack
-  - Sauce Labs Fleece Jacket
-  - Test.allTheThings() T-Shirt (Red)
+1. For each of the items, click the respective "Add to cart" button
 2. Click on the shopping cart button
   - User should be redirected to the cart page
 3. Click on the checkout button
