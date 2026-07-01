@@ -21,8 +21,7 @@
   - User should be redirected to `checkout-step-one` page
 4. Fill in name and address info, then click on the "Continue" button
   - User should be redirected to `checkout-step-two` page
-5. Check that the checkout overview is correct (items, quantities, values)
-6. Click "Finish"
+5. Click "Finish"
   - User should be redirected to the `checkout-complete` page with a success message
-7. Click "Back Home" button
+6. Click "Back Home" button
   - User is sent to the Products page
