@@ -7,7 +7,7 @@ export default class CartPage extends BaseComponent {
 
     this.elements = {
       checkoutBtn: this.page.getByTestId("checkout"),
-    }
+    };
   }
 
   async clickCheckoutBtn() {

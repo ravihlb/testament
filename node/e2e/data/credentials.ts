@@ -6,5 +6,5 @@ export enum AcceptedUsernames {
   ProblemUser = "problem_user",
   PerformanceGlitchUser = "performance_glitch_user",
   ErrorUser = "error_user",
-  VisualUser = "visual_user"
+  VisualUser = "visual_user",
 }

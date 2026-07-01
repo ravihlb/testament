@@ -8,7 +8,7 @@ export default class LoginForm extends BaseComponent {
       usernameInput: this.page.getByTestId("username"),
       passwordInput: this.page.getByTestId("password"),
       loginButton: this.page.getByTestId("login-button"),
-    }
+    };
   }
 
   async login(username: string, password: string) {

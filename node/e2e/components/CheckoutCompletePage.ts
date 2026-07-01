@@ -8,11 +8,10 @@ export default class CheckoutCompletePage extends BaseComponent {
     this.elements = {
       completeHeader: this.page.getByTestId("complete-header"),
       backHomeBtn: this.page.getByTestId("back-to-products"),
-    }
+    };
   }
 
   async clickBackHomeBtn() {
     await this.elements.backHomeBtn!.click();
   }
 }
-

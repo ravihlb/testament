@@ -7,7 +7,7 @@ export default class PrimaryHeader extends BaseComponent {
 
     this.elements = {
       shoppingCartLink: this.page.getByTestId("shopping-cart-link"),
-    }
+    };
   }
 
   async goToCart() {

@@ -8,12 +8,14 @@ export default class InventoryItem extends BaseComponent {
   constructor(page: Page, itemName: string) {
     super(page);
     this.itemName = itemName;
-    this.root = this.page.getByTestId("inventory-item-description").filter({ hasText: itemName });
+    this.root = this.page
+      .getByTestId("inventory-item-description")
+      .filter({ hasText: itemName });
 
     this.elements = {
       name: this.root.getByTestId("inventory-item-name"),
       addToCartButton: this.root.getByTestId(/add-to-cart-.*/),
-    }
+    };
   }
 
   async addToCart() {

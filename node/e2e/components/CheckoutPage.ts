@@ -17,10 +17,14 @@ export default class CheckoutPage extends BaseComponent {
       postalCodeField: this.page.getByTestId("postalCode"),
       continueBtn: this.page.getByTestId("continue"),
       finishBtn: this.page.getByTestId("finish"),
-    }
+    };
   }
 
-  async fillCheckoutForm({ firstName, lastName, postalCode }: CheckoutFormFields) {
+  async fillCheckoutForm({
+    firstName,
+    lastName,
+    postalCode,
+  }: CheckoutFormFields) {
     await this.elements.firstNameField!.fill(firstName);
     await this.elements.lastNameField!.fill(lastName);
     await this.elements.postalCodeField!.fill(postalCode);
@@ -37,4 +41,3 @@ export default class CheckoutPage extends BaseComponent {
     return this;
   }
 }
-
