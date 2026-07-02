@@ -10,7 +10,7 @@ import PrimaryHeader from "../components/PrimaryHeader";
 import { AcceptedUsernames, DEFAULT_PASSWORD } from "../data/credentials";
 import { InventoryItems } from "../data/products";
 
-test.describe("Flow - Order", async () => {
+test.describe("Order Flow: Buy 3 Items", async () => {
   test.beforeEach("Setup", async ({ page }) => {
     const loginForm = new LoginForm(page);
 
