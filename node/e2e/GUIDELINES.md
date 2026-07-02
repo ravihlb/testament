@@ -14,7 +14,7 @@ e2e/
 
 - Spec files live in `tests/` and use the `*.spec.ts` suffix.
 - Page objects live in `components/` and extend `BaseComponent<TElements>`.
-- Each POM exports a separate `*Elements` type (e.g. `LoginFormElements`) and passes it as the type argument so `elements` keys autocomplete as `Locator`.
+  - Each POM exports a separate `*Elements` type (e.g. `LoginFormElements`) and passes it as the type argument so `elements` keys autocomplete as `Locator`.
 - Reusable values (usernames, product names) live in `data/`.
 
 ## Imports
