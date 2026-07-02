@@ -22,7 +22,7 @@ test.describe("Flow - Auth", async () => {
     await primaryHeader.openMenu();
     await sidebarMenu.clickLogout();
 
-    await page.waitForURL((url) => url.pathname === "/");
+    await page.waitForURL("/");
     expect(loginForm.elements.loginButton).toBeVisible();
   });
 });
