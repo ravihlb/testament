@@ -45,6 +45,8 @@ Order imports in three groups:
 
 ## Describe / setup / test structure
 
+When a spec file contains **multiple tests** that share preconditions, use `beforeEach`:
+
 ```ts
 test.describe("Flow - Order", async () => {
   test.beforeEach("Setup", async ({ page }) => {
@@ -57,15 +59,28 @@ test.describe("Flow - Order", async () => {
 });
 ```
 
+When a spec file contains a **single test**, do not add a `beforeEach` block — keep setup in the main test body:
+
+```ts
+test.describe("Flow - Authentication", async () => {
+  test("Login and Logout", async ({ page }) => {
+    await page.goto("/");
+
+    const loginForm = new LoginForm(page);
+    // ...
+  });
+});
+```
+
 | Convention | Example |
 |---|---|
 | Describe block name | `"Flow - {Feature}"` (e.g. `"Flow - Order"`) |
-| beforeEach label | `"Setup"` |
+| beforeEach label | `"Setup"` (only when multiple tests share setup) |
 | Test name | Short, feature-oriented (e.g. `"Order"`) |
 
 ### beforeEach — authentication setup
 
-When a flow requires a logged-in user, centralize login in `beforeEach`:
+When a flow requires a logged-in user and the spec has **multiple tests**, centralize login in `beforeEach`. For a single-test spec, perform login at the start of the test body instead.
 
 ```ts
 test.beforeEach("Setup", async ({ page }) => {
@@ -193,7 +208,7 @@ User-flow plans under `plans/user-flows/` describe prerequisites, datasets, and 
 
 - [ ] File placed in `tests/` with `.spec.ts` suffix.
 - [ ] `test.describe("Flow - …")` wrapper with descriptive name.
-- [ ] Shared login/navigation in `test.beforeEach("Setup", …)` when applicable.
+- [ ] Shared login/navigation in `test.beforeEach("Setup", …)` only when the spec has multiple tests; otherwise keep setup in the test body.
 - [ ] Page objects instantiated at the start of each test.
 - [ ] No raw locators in the spec — delegate to components.
 - [ ] Test data from `data/` enums/constants or component types.
