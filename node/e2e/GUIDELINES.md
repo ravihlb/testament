@@ -6,9 +6,10 @@ Derived from `tests/order.spec.ts` and its supporting page objects, data modules
 
 ```
 e2e/
-├── components/     # Page Object Model classes
-├── data/           # Shared test data (credentials, products)
-├── tests/          # Spec files (*.spec.ts)
+├── components/           # Page Object Model classes
+│   └── helpers/          # Assertion helpers (no page object classes)
+├── data/                 # Shared test data (credentials, products)
+├── tests/                # Spec files (*.spec.ts)
 └── GUIDELINES.md
 ```
 
@@ -36,7 +37,13 @@ Order imports in three groups:
 
    Import component-defined types (e.g. `CheckoutFormFields`) alongside the default export when form or payload shapes are needed in the test.
 
-3. **Test data** — named imports from `../data/`:
+3. **Assertion helpers** — named imports from `../components/helpers/`:
+
+   ```ts
+   import { verifyCheckoutOverview } from "../components/helpers/checkout-page-helper";
+   ```
+
+4. **Test data** — named imports from `../data/`:
 
    ```ts
    import { AcceptedUsernames, DEFAULT_PASSWORD } from "../data/credentials";
@@ -122,6 +129,7 @@ await cartPage.clickCheckoutBtn();
 await checkoutPage.fillCheckoutForm(checkoutFormInfo);
 await checkoutPage.clickContinueBtn();
 await checkoutPage.clickFinishCheckoutBtn();
+await verifyCheckoutOverview(page, itemsToAdd);
 ```
 
 ### Use typed, centralized test data
@@ -137,7 +145,7 @@ const itemsToAdd = [
 ];
 
 const checkoutFormInfo: CheckoutFormFields = {
-  firstName: "Ravi",
+  firstName: "Example",
   lastName: "Test",
   postalCode: "12345",
 };
@@ -153,15 +161,43 @@ for (const item of itemsToAdd) {
 }
 ```
 
+## Page objects vs assertion helpers
+
+An Object Model class should **never** call `expect()`. Page objects expose locators and user actions only — clicks, fills, navigation, and reads that return values.
+
+Assertion logic (methods such as `verifyCheckoutOverview`) belongs in helper files under `components/helpers/`. Helpers receive a `Page` (and any data needed) and perform the `expect()` calls there. Specs import and call helpers directly; do not add verify/assert methods to page object classes.
+
+```ts
+// components/helpers/checkout-page-helper.ts
+import { expect, type Page } from "@playwright/test";
+import type { InventoryItems } from "../../data/products";
+
+export async function verifyCheckoutOverview(
+  page: Page,
+  items: InventoryItems[],
+) {
+  // expect(...) assertions here
+}
+```
+
+```ts
+// tests/order-positive.spec.ts
+await checkoutPage.clickContinueBtn();
+await verifyCheckoutOverview(page, itemsToAdd);
+```
+
 ## Assertions
 
 ### Element visibility via page object elements
 
 Assert on locators exposed through the component's typed `elements` map:
+When a one-off assertion is enough, assert on locators exposed through the component's `elements` map in the spec, cast to `Locator` when needed:
 
 ```ts
 expect(checkoutCompletePage.elements.completeHeader).toBeVisible();
 ```
+
+For reusable or multi-step verification, use a helper under `components/helpers/` instead of adding methods to the page object.
 
 ### Navigation
 
@@ -211,7 +247,8 @@ User-flow plans under `plans/user-flows/` describe prerequisites, datasets, and 
 - [ ] Shared login/navigation in `test.beforeEach("Setup", …)` only when the spec has multiple tests; otherwise keep setup in the test body.
 - [ ] Page objects instantiated at the start of each test.
 - [ ] No raw locators in the spec — delegate to components.
+- [ ] No `expect()` calls in page object classes — use helpers in `components/helpers/`.
 - [ ] Test data from `data/` enums/constants or component types.
 - [ ] Navigation confirmed with `waitForURL`; outcomes checked with `expect`.
 - [ ] Flow steps align with the corresponding plan in `plans/user-flows/`.
-- [ ] File formatted with Biome (`pnpm exec biome check --write .` from `node/`).
+- [ ] File formatted with Biome (Run `pnpm exec biome check --write .` from `node/`).
