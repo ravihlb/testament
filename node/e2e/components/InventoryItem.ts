@@ -26,4 +26,8 @@ export default class InventoryItem extends BaseComponent<InventoryItemElements> 
   async addToCart() {
     await this.elements.addToCartButton.click();
   }
+
+  async openDetails() {
+    await this.elements.name!.click();
+  }
 }
