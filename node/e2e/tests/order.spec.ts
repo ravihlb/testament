@@ -1,4 +1,4 @@
-import test, { expect, type Locator } from "@playwright/test";
+import test, { expect } from "@playwright/test";
 import CartPage from "../components/CartPage";
 import CheckoutCompletePage from "../components/CheckoutCompletePage";
 import CheckoutPage, {
@@ -49,9 +49,7 @@ test.describe("Order Flow: Buy 3 Items", async () => {
     await checkoutPage.fillCheckoutForm(checkoutFormInfo);
     await checkoutPage.clickContinueBtn();
     await checkoutPage.clickFinishCheckoutBtn();
-    expect(
-      checkoutCompletePage.elements.completeHeader as Locator,
-    ).toBeVisible();
+    expect(checkoutCompletePage.elements.completeHeader).toBeVisible();
 
     await checkoutCompletePage.clickBackHomeBtn();
     await page.waitForURL("**/inventory.html");

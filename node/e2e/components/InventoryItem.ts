@@ -1,7 +1,12 @@
-import { Locator, Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import BaseComponent from "./BaseComponent";
 
-export default class InventoryItem extends BaseComponent {
+export type InventoryItemElements = {
+  name: Locator;
+  addToCartButton: Locator;
+};
+
+export default class InventoryItem extends BaseComponent<InventoryItemElements> {
   private root: Locator;
   itemName: string;
 
@@ -19,6 +24,6 @@ export default class InventoryItem extends BaseComponent {
   }
 
   async addToCart() {
-    await this.elements.addToCartButton!.click();
+    await this.elements.addToCartButton.click();
   }
 }

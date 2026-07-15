@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import BaseComponent from "./BaseComponent";
 
 export type CheckoutFormFields = {
@@ -7,7 +7,15 @@ export type CheckoutFormFields = {
   postalCode: string;
 };
 
-export default class CheckoutPage extends BaseComponent {
+export type CheckoutPageElements = {
+  firstNameField: Locator;
+  lastNameField: Locator;
+  postalCodeField: Locator;
+  continueBtn: Locator;
+  finishBtn: Locator;
+};
+
+export default class CheckoutPage extends BaseComponent<CheckoutPageElements> {
   constructor(page: Page) {
     super(page);
 
@@ -25,19 +33,19 @@ export default class CheckoutPage extends BaseComponent {
     lastName,
     postalCode,
   }: CheckoutFormFields) {
-    await this.elements.firstNameField!.fill(firstName);
-    await this.elements.lastNameField!.fill(lastName);
-    await this.elements.postalCodeField!.fill(postalCode);
+    await this.elements.firstNameField.fill(firstName);
+    await this.elements.lastNameField.fill(lastName);
+    await this.elements.postalCodeField.fill(postalCode);
     return this;
   }
 
   async clickContinueBtn() {
-    await this.elements.continueBtn!.click();
+    await this.elements.continueBtn.click();
     return this;
   }
 
   async clickFinishCheckoutBtn() {
-    await this.elements.finishBtn!.click();
+    await this.elements.finishBtn.click();
     return this;
   }
 }

@@ -1,7 +1,11 @@
-import { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import BaseComponent from "./BaseComponent";
 
-export default class CartPage extends BaseComponent {
+export type CartPageElements = {
+  checkoutBtn: Locator;
+};
+
+export default class CartPage extends BaseComponent<CartPageElements> {
   constructor(page: Page) {
     super(page);
 
@@ -11,6 +15,6 @@ export default class CartPage extends BaseComponent {
   }
 
   async clickCheckoutBtn() {
-    await this.elements.checkoutBtn!.click();
+    await this.elements.checkoutBtn.click();
   }
 }

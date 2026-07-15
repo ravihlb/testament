@@ -1,7 +1,12 @@
-import { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import BaseComponent from "./BaseComponent";
 
-export default class CheckoutCompletePage extends BaseComponent {
+export type CheckoutCompletePageElements = {
+  completeHeader: Locator;
+  backHomeBtn: Locator;
+};
+
+export default class CheckoutCompletePage extends BaseComponent<CheckoutCompletePageElements> {
   constructor(page: Page) {
     super(page);
 
@@ -12,6 +17,6 @@ export default class CheckoutCompletePage extends BaseComponent {
   }
 
   async clickBackHomeBtn() {
-    await this.elements.backHomeBtn!.click();
+    await this.elements.backHomeBtn.click();
   }
 }

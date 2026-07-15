@@ -1,11 +1,13 @@
-import { Locator, Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 
-export default abstract class BaseComponent {
+export default abstract class BaseComponent<
+  TElements extends Record<string, Locator> = Record<string, never>,
+> {
   protected page: Page;
-  elements: Record<string, Locator>;
+  elements: TElements;
 
   constructor(page: Page) {
     this.page = page;
-    this.elements = {};
+    this.elements = {} as TElements;
   }
 }

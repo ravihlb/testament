@@ -1,7 +1,13 @@
-import { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
 import BaseComponent from "./BaseComponent";
 
-export default class LoginForm extends BaseComponent {
+export type LoginFormElements = {
+  usernameInput: Locator;
+  passwordInput: Locator;
+  loginButton: Locator;
+};
+
+export default class LoginForm extends BaseComponent<LoginFormElements> {
   constructor(page: Page) {
     super(page);
     this.elements = {
@@ -12,8 +18,8 @@ export default class LoginForm extends BaseComponent {
   }
 
   async login(username: string, password: string) {
-    await this.elements.usernameInput!.fill(username);
-    await this.elements.passwordInput!.fill(password);
-    await this.elements.loginButton!.click();
+    await this.elements.usernameInput.fill(username);
+    await this.elements.passwordInput.fill(password);
+    await this.elements.loginButton.click();
   }
 }
